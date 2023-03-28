@@ -25,6 +25,8 @@ fn main() {
 
         // declare a mutable string 'guess' with the new function in the String type
         let mut guess = String::new();
+
+        println!("Enter your guess:");
         
         // call the stdin() in io library which gives us an object of Stdin
         io::stdin()
@@ -33,10 +35,16 @@ fn main() {
             // crash the program and show the below message, if there was any error
             .expect("Invalid input");
 
-        let guess: u32 = guess
-                            .trim()
-                            .parse()
-                            .expect("Failed to parse number");
+        let guess: u32 = 
+                        match guess.trim().parse() {
+                            // if Ok, then return the number
+                            Ok(num) => num,
+                            // if Error, then handle all errors with '_'
+                            Err(_) => {
+                                println!("Please enter a number");
+                                continue;
+                            },
+                        };
 
         // template formatting into string with placeholders
         println!("You guessed: {}", guess);
