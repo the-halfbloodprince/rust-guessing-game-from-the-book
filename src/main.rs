@@ -5,6 +5,8 @@ extern crate rand;
 use std::io;
 // use the Rng trait from the rand library
 use rand::Rng;
+// Ordering is a enum type which is the result of a comparison between two values
+use std::cmp::Ordering;
 
 fn main() {
 
@@ -28,8 +30,22 @@ fn main() {
         // crash the program and show the below message, if there was any error
         .expect("Invalid input");
 
+    let guess: u32 = guess
+                        .trim()
+                        .parse()
+                        .expect("Failed to parse number");
+
     // template formatting into string with placeholders
     println!("You guessed: {}", guess);
+
+    // switch statement in other languages
+    // compare guess with the secret number
+    match guess.cmp(&secret_num) {
+        Ordering::Less => println!("Too Less"),
+        Ordering::Greater => println!("Too High"),
+        Ordering::Equal => println!("Correct"),
+    }
+
     println!("The secret number was: {}", secret_num);
 
 }
