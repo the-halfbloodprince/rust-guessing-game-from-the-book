@@ -20,32 +20,39 @@ fn main() {
                         // call it's gen_range function which returns a number
                         .gen_range(1..101);
 
-    // declare a mutable string 'guess' with the new function in the String type
-    let mut guess = String::new();
+                    
+    loop {
 
-    // call the stdin() in io library which gives us an object of Stdin
-    io::stdin()
-        // read line with the Stdin object into the mutable guess variable
-        .read_line(&mut guess)
-        // crash the program and show the below message, if there was any error
-        .expect("Invalid input");
+        // declare a mutable string 'guess' with the new function in the String type
+        let mut guess = String::new();
+        
+        // call the stdin() in io library which gives us an object of Stdin
+        io::stdin()
+            // read line with the Stdin object into the mutable guess variable
+            .read_line(&mut guess)
+            // crash the program and show the below message, if there was any error
+            .expect("Invalid input");
 
-    let guess: u32 = guess
-                        .trim()
-                        .parse()
-                        .expect("Failed to parse number");
+        let guess: u32 = guess
+                            .trim()
+                            .parse()
+                            .expect("Failed to parse number");
 
-    // template formatting into string with placeholders
-    println!("You guessed: {}", guess);
+        // template formatting into string with placeholders
+        println!("You guessed: {}", guess);
 
-    // switch statement in other languages
-    // compare guess with the secret number
-    match guess.cmp(&secret_num) {
-        Ordering::Less => println!("Too Less"),
-        Ordering::Greater => println!("Too High"),
-        Ordering::Equal => println!("Correct"),
+        // switch statement in other languages
+        // compare guess with the secret number
+        match guess.cmp(&secret_num) {
+            Ordering::Less => println!("Too Less"),
+            Ordering::Greater => println!("Too High"),
+            Ordering::Equal => {
+                println!("Correct");
+                break;
+            },
+        }
     }
 
-    println!("The secret number was: {}", secret_num);
+    // println!("The secret number was: {}", secret_num);
 
 }
